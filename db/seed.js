@@ -14,23 +14,39 @@ async function seed() {
   // TODO
 
   // create tracks
-  for (let i = 0; i < 20; i++) {
-    let songName = faker.music.songName({ max: 20 });
-    let songDuration = faker.number.int({ min: 1, max: 5 });
-    await createTrack(songName, songDuration);
+
+  for (let i = 1; i <= 20; i++) {
+    await createPlaylist(
+      "Playlist " + faker.word.adjective({ length: { min: 5, max: 10 } }),
+      faker.word.words({ count: 6 })
+    );
+    await createTrack(
+      faker.music.songName({ max: 20 }),
+      faker.number.int({ min: 1, max: 5 })
+    );
   }
 
-  // create playlists
-  for (let i = 0; i < 10; i++) {
-    let playlistName = faker.word.adjective({ length: { min: 5, max: 10 } });
-    let playlistDesc = faker.word.words({ count: 6 });
-    await createPlaylist(playlistName, playlistDesc);
+  for (let i = 1; i <= 15; i++) {
+    const playlistId = 1 + Math.floor(i / 2);
+    await createPlaylistTracks(playlistId, i);
   }
+  // for (let i = 0; i < 20; i++) {
+  //   let songName = faker.music.songName({ max: 20 });
+  //   let songDuration = faker.number.int({ min: 1, max: 5 });
+  //   await createTrack(songName, songDuration);
+  // }
 
-  // create playlists_tracks
-  for (let i = 0; i < 15; i++) {
-    const playlist_id = faker.number.int({ min: 1, max: 10 });
-    const track_id = faker.number.int({ min: 1, max: 20 });
-    await createPlaylistTracks(playlist_id, track_id);
-  }
+  // // create playlists
+  // for (let i = 0; i < 10; i++) {
+  //   let playlistName = faker.word.adjective({ length: { min: 5, max: 10 } });
+  //   let playlistDesc = faker.word.words({ count: 6 });
+  //   await createPlaylist(playlistName, playlistDesc);
+  // }
+
+  // // create playlists_tracks
+  // for (let i = 0; i < 15; i++) {
+  //   const playlist_id = faker.number.int({ min: 1, max: 10 });
+  //   const track_id = faker.number.int({ min: 1, max: 20 });
+  //   await createPlaylistTracks(playlist_id, track_id);
+  // }
 }

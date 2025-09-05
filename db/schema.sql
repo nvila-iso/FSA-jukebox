@@ -1,7 +1,7 @@
 -- TODO
-DROP TABLE IF EXISTS playlists CASCADE;
+DROP TABLE IF EXISTS playlists;
 DROP TABLE IF EXISTS tracks CASCADE;
-DROP TABLE IF EXISTS playlists_tracks CASCADE;
+DROP TABLE IF EXISTS playlists_tracks;
 
 
 CREATE TABLE playlists (

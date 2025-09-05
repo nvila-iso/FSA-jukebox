@@ -52,25 +52,34 @@ router
     res.status(200).send(playlists);
   })
   .post(async (req, res) => {
-    if (!req.body) return res.status(400).send("Request body required...");
+    if (!req.body) return res.status(400).send("REquest body is required...");
 
-    const { id } = req.params;
     const { trackId } = req.body;
+    if (!trackId)
+      return res.status(400).send("Request body requires trackId...");
 
-    if (!id || !trackId) {
-      return res.status(400).send("ID is missing...");
-    }
-
-    const track = await getTrackById(trackId);
-    const exTrack = await getPlaylistTracksById(trackId);
-
-    if (!track) {
-      return res.status(400).send("Track does not exist...");
-    } else if (!exTrack) {
-      return res.status(400).send("This track already exists...");
-    }
-
-    const newTrack = await createPlaylistTracks(id, trackId);
-
-    res.status(201).send(newTrack);
+    const playlistTrack = await createPlaylistTracks(req.playlist.id, trackId);
+    res.status(201).send(playlistTrack);
   });
+
+// if (!req.body) return res.status(400).send("Request body required...");
+
+// const { id } = req.params;
+// const { trackId } = req.body;
+
+// if (!id || !trackId) {
+//   return res.status(400).send("ID is missing...");
+// }
+
+// const track = await getTrackById(trackId);
+// const exTrack = await getPlaylistTracksById(trackId);
+
+// if (!track) {
+//   return res.status(400).send("Track does not exist...");
+// } else if (!exTrack) {
+//   return res.status(400).send("This track already exists...");
+// }
+
+// const newTrack = await createPlaylistTracks(id, trackId);
+
+// res.status(201).send(newTrack);

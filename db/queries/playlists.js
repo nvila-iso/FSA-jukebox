@@ -4,9 +4,12 @@ export async function createPlaylist(name, description) {
   const SQL = `
     INSERT INTO playlists (name, description)
     VALUES ($1, $2)
-    RETURNING name, description
+    RETURNING *
     `;
   const { rows: playlists } = await db.query(SQL, [name, description]);
+  console.log("###playlists###");
+  console.log(playlists);
+  console.log("###playlists###");
   return playlists[0];
 }
 

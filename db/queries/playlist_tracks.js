@@ -8,7 +8,7 @@ export async function createPlaylistTracks(playlist_id, track_id) {
     RETURNING *
     `;
   const { rows: playlistTracks } = await db.query(SQL, [playlist_id, track_id]);
-  return playlistTracks;
+  return playlistTracks[0];
 }
 
 export async function getPlaylistTracksById(id) {

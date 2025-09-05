@@ -190,7 +190,9 @@ describe("/playlists router", () => {
           description: "New Playlist Description",
         })
       ).body;
-
+      console.log("playlist");
+      console.log(playlist);
+      console.log("playlist");
       const response = await request(app)
         .post(`/playlists/${playlist.id}/tracks`)
         .send({
@@ -202,7 +204,7 @@ describe("/playlists router", () => {
           id: expect.any(Number),
           playlist_id: playlist.id,
           track_id: 1,
-        }),
+        })
       );
     });
 
